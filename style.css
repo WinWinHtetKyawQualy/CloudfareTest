@@ -1,0 +1,151 @@
+:root {
+  --bg: #0f1420;
+  --card: #1a2133;
+  --text: #e8ecf5;
+  --muted: #8d97ad;
+  --accent: #3b82f6;
+  --danger: #ef4444;
+  --warn: #f59e0b;
+  --ok: #22c55e;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 16px 24px;
+  background: #151b2b;
+  border-bottom: 1px solid #263049;
+}
+.topbar h1 { font-size: 1.3rem; }
+
+.status { display: flex; align-items: center; gap: 8px; font-size: .9rem; color: var(--muted); }
+.dot { width: 10px; height: 10px; border-radius: 50%; background: var(--warn); }
+.dot.ok { background: var(--ok); box-shadow: 0 0 8px var(--ok); }
+.dot.err { background: var(--danger); }
+
+.layout {
+  max-width: 1000px;
+  margin: 24px auto;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.wide { grid-column: 1 / -1; }
+
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 20px;
+  border: 1px solid #263049;
+}
+.card h2 { font-size: 1.05rem; margin-bottom: 12px; }
+.card-head { display: flex; justify-content: space-between; align-items: baseline; }
+
+.muted { color: var(--muted); font-size: .88rem; }
+.small { margin-top: 10px; font-size: .78rem; }
+
+label { display: block; margin: 12px 0 6px; font-size: .92rem; }
+input[type="range"] { width: 100%; accent-color: var(--accent); }
+
+.toggles { margin: 14px 0; }
+.check { display: flex; align-items: center; gap: 8px; margin: 6px 0; cursor: pointer; }
+
+.btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: .92rem;
+  cursor: pointer;
+  transition: transform .1s, filter .15s;
+}
+.btn:hover { filter: brightness(1.1); }
+.btn:active { transform: scale(.97); }
+.btn.ghost { background: transparent; border: 1px solid #36425f; color: var(--text); }
+.btn.danger { background: var(--danger); }
+
+.drills { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 12px; }
+
+/* Quake list */
+.quakes { list-style: none; max-height: 340px; overflow-y: auto; margin-top: 10px; }
+.quakes li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 6px;
+  border-bottom: 1px solid #263049;
+}
+.mag {
+  min-width: 52px;
+  text-align: center;
+  font-weight: 700;
+  padding: 6px 0;
+  border-radius: 8px;
+  background: #2a3550;
+}
+.mag.m4 { background: #8a6a12; }
+.mag.m5 { background: #b45309; }
+.mag.m6 { background: #b91c1c; }
+.q-info { flex: 1; }
+.q-place { font-size: .95rem; }
+.q-time { font-size: .78rem; color: var(--muted); }
+.q-link { color: var(--accent); font-size: .8rem; text-decoration: none; }
+
+.tips { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; font-size: .9rem; }
+.tips div { background: #202a41; padding: 12px; border-radius: 10px; }
+
+/* Alarm overlay */
+.alarm {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(185, 28, 28, .92);
+  animation: flash 0.8s infinite alternate;
+}
+.alarm[hidden] { display: none; }
+@keyframes flash {
+  from { background: rgba(185, 28, 28, .95); }
+  to   { background: rgba(60, 5, 5, .95); }
+}
+.alarm-box {
+  background: #fff;
+  color: #1b1b1b;
+  max-width: 520px;
+  width: 100%;
+  border-radius: 18px;
+  padding: 28px;
+  text-align: center;
+}
+.alarm-icon { font-size: 3.5rem; animation: shake .4s infinite; }
+@keyframes shake {
+  0%,100% { transform: rotate(-8deg); }
+  50% { transform: rotate(8deg); }
+}
+.alarm-box h2 { color: #b91c1c; margin: 8px 0; font-size: 1.6rem; }
+.alarm-box ul { text-align: left; margin: 14px 0 18px 20px; font-size: .95rem; }
+.alarm-box li { margin: 4px 0; }
+.alarm-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+@media (max-width: 720px) {
+  .layout { grid-template-columns: 1fr; }
+}

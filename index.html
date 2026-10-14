@@ -1,11 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Natural Disaster Alarm</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Hello!!!</h1>
+
+  <header class="topbar">
+    <h1>🚨 Natural Disaster Alarm</h1>
+    <div class="status" id="status">
+      <span class="dot" id="statusDot"></span>
+      <span id="statusText">Starting…</span>
+    </div>
+  </header>
+
+  <main class="layout">
+
+    <!-- Settings -->
+    <section class="card">
+      <h2>Settings</h2>
+
+      <label for="minMag">
+        Alert when earthquake magnitude ≥ <strong id="minMagValue">5.0</strong>
+      </label>
+      <input type="range" id="minMag" min="2" max="8" step="0.1" value="5">
+
+      <label for="feedMag">
+        Show in list: magnitude ≥ <strong id="feedMagValue">2.5</strong>
+      </label>
+      <input type="range" id="feedMag" min="0" max="7" step="0.5" value="2.5">
+
+      <div class="toggles">
+        <label class="check"><input type="checkbox" id="soundOn" checked> Alarm sound</label>
+        <label class="check"><input type="checkbox" id="notifyOn"> Browser notifications</label>
+        <label class="check"><input type="checkbox" id="autoRefresh" checked> Auto-refresh (60s)</label>
+      </div>
+
+      <button class="btn ghost" id="refreshBtn">Refresh now</button>
+    </section>
+
+    <!-- Drills -->
+    <section class="card">
+      <h2>Test / Drill Alarms</h2>
+      <p class="muted">Simulated alerts to practice your response. Not real events.</p>
+      <div class="drills">
+        <button class="btn" data-drill="earthquake">🌍 Earthquake</button>
+        <button class="btn" data-drill="tsunami">🌊 Tsunami</button>
+        <button class="btn" data-drill="flood">🌧️ Flood</button>
+        <button class="btn" data-drill="cyclone">🌀 Cyclone</button>
+        <button class="btn" data-drill="wildfire">🔥 Wildfire</button>
+        <button class="btn" data-drill="volcano">🌋 Volcano</button>
+      </div>
+    </section>
+
+    <!-- Live feed -->
+    <section class="card wide">
+      <div class="card-head">
+        <h2>Live Earthquakes (last 24h)</h2>
+        <span class="muted" id="lastUpdated">—</span>
+      </div>
+      <ul id="quakeList" class="quakes"></ul>
+      <p class="muted small">Data: USGS Earthquake Hazards Program.</p>
+    </section>
+
+    <!-- Safety tips -->
+    <section class="card wide">
+      <h2>Quick Safety Tips</h2>
+      <div class="tips">
+        <div><strong>Earthquake</strong><br>Drop, Cover, Hold On. Stay away from windows. Go outside only when shaking stops.</div>
+        <div><strong>Tsunami</strong><br>If near the coast and you feel a strong quake, move to high ground immediately.</div>
+        <div><strong>Flood</strong><br>Move to higher floors. Never walk or drive through floodwater.</div>
+        <div><strong>Cyclone</strong><br>Shelter indoors away from windows. Keep a battery radio and emergency kit.</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Full-screen alarm -->
+  <div class="alarm" id="alarm" role="alertdialog" aria-live="assertive" hidden>
+    <div class="alarm-box">
+      <div class="alarm-icon" id="alarmIcon">🚨</div>
+      <h2 id="alarmTitle">ALERT</h2>
+      <p id="alarmMessage"></p>
+      <ul id="alarmTips"></ul>
+      <div class="alarm-actions">
+        <button class="btn" id="muteBtn">🔇 Mute sound</button>
+        <button class="btn danger" id="dismissBtn">I'm safe – Dismiss</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
