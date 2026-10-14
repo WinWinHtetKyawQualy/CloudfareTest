@@ -1,0 +1,7 @@
+{
+  "name": "disaster-alarm",
+  "compatibility_date": "2026-10-14",
+  "assets": {
+    "directory": "./public"
+  }
+}
